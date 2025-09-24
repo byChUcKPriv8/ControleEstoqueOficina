@@ -1,0 +1,31 @@
+{% extends 'produtos/base.html' %} {% block content %}
+<h2>Lista de Produtos</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Preço</th>
+      <th>Quantidade</th>
+      <th>Fabricante</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for produto in produtos %}
+    <tr>
+      <td>{{ produto.nome }}</td>
+      <td>R$ {{ produto.preco }}</td>
+      <td>{{ produto.quantidade }}</td>
+      <td>{{ produto.fabricante }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3">Nenhum produto cadastrado.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<footer class="text-center mt-4">
+  <p> WorkDev by Lucas Eziquiel</p>
+</footer>
+{% endblock %}

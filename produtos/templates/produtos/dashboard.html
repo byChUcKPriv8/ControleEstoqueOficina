@@ -1,0 +1,49 @@
+{% extends 'produtos/base.html' %}
+{% block content %}
+<h2>📦 Controle de Estoque - Oficina Mecânica Precision</h2>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Código</th>
+      <th>Localização</th>
+      <th>Quantidade</th>
+      <th>Estoque Mínimo</th>
+      <th>Fabricante</th>
+      <th>Ações</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in itens %}
+    <tr class="{% if item.em_falta %}table-danger{% endif %}">
+      <td>{{ item.nome }}</td>
+      <td>{{ item.codigo_referencia }}</td>
+      <td>{{ item.localizacao }}</td>
+      <td>{{ item.quantidade }}</td>
+      <td>{{ item.estoque_minimo }}</td>
+      <td>{{ item.fabricante }}</td>
+      <td>
+        <a href="{% url 'entrada' item.id %}" class="btn btn-success btn-sm">Entrada</a>
+        <a href="{% url 'saida' item.id %}" class="btn btn-danger btn-sm">Saída</a>
+      </td>
+      <td>
+        {% if item.em_falta %}
+          ❌ Abaixo do mínimo
+        {% else %}
+          ✅ OK
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="8">Nenhum item cadastrado.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<footer class="text-center mt-4 p-3 bg-light border-top">
+  <p>⚙️ Desenvolvido por Lucas Eziquiel</p>
+</footer>
+{% endblock %}
